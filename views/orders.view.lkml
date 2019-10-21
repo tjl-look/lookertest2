@@ -37,4 +37,9 @@ view: orders {
     type: count
     drill_fields: [id, users.id, users.first_name, users.last_name, order_items.count]
   }
+  measure: first_order_date {
+    type:date
+    sql: MIN(${TABLE}.created_at) ;;
+  }
+
 }

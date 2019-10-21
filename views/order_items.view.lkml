@@ -33,6 +33,15 @@ view: order_items {
     ]
     sql: ${TABLE}.returned_at ;;
   }
+  dimension: Returned_boolean {
+    case: {
+      when: {
+        sql: ${TABLE}.returned_at IS NULL ;;
+        label: "No"
+      }
+      else: "Yes"
+    }
+  }
 
   dimension: sale_price {
     type: number

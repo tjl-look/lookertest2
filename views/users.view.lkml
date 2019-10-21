@@ -13,6 +13,13 @@ view: users {
     sql: ${TABLE}.age ;;
   }
 
+  dimension: age_groups{
+    type: tier
+    tiers: [10,20,30,40,50]
+    style:integer
+    sql: ${age} ;;
+  }
+
   dimension: city {
     type: string
     sql: ${TABLE}.city ;;
@@ -72,6 +79,34 @@ view: users {
     type: count
     drill_fields: [detail*]
   }
+  measure: male_count {
+    type:  count
+    filters: {
+      field: gender
+      value: "M"
+    }
+  }
+  measure: male_count_d {
+    type:  count_distinct
+    sql: ${id} ;;
+    filters: {
+      field: gender
+      value: "M"
+    }
+  }
+  measure: female_count {
+    type:  count_distinct
+    filters: {
+      field: gender
+      value: "F"
+    }
+  }
+
+  measure: percent_male{
+    type: number
+    sql: ${male_count_d}/${count} ;;
+  }
+
 
   # ----- Sets of fields for drilling ------
   set: detail {

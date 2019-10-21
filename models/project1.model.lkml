@@ -82,6 +82,8 @@ explore: user_data {
   }
 }
 
+explore: test {}
+
 explore: users {}
 
 explore: users_nn {}
