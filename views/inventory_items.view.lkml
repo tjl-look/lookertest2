@@ -11,6 +11,8 @@ view: inventory_items {
   dimension: cost {
     type: number
     sql: ${TABLE}.cost ;;
+    value_format_name: usd
+    html: <center><font color="blue">{{rendered_value}}</font></center> ;;
   }
 
   dimension_group: created {
