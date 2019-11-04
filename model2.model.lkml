@@ -45,12 +45,18 @@ explore: order_items {
 }
 
 explore: orders_test {
+  label: "Orders Test"
   from: orders
+  view_name:  orders
   join: users {
     type: left_outer
-    sql_on: ${orders_test.user_id} = ${users.id} ;;
+    sql_on: ${orders.user_id} = ${users.id} ;;
     relationship: many_to_one
   }
-
-  #sql_always_where: {% if orders.Month_selector._parameter_value == "1"} ;;
+  sql_always_where: {% if orders.Month_selector._parameter_value == "1" %}
+  ${created_month_name} = ((MONTHNAME(orders.created_at )) = 'January')
+  {% else %}
+  ${created_month_name} = ((MONTHNAME(orders.created_at )) = 'February')
+  {% endif %}
+  ;;
 }

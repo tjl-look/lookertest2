@@ -3,9 +3,10 @@ view: orders {
   drill_fields: [id]
 
   parameter: Month_selector{
+    type: string
     allowed_value: {
       label: "January"
-      value: "1"
+      value: "January"
     }
     allowed_value: {
       label: "February"
@@ -53,7 +54,7 @@ view: orders {
     }
     allowed_value: {
       label: "Current Month"
-      value: "13"
+      value: "Current Month"
     }
   }
 

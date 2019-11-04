@@ -82,8 +82,21 @@ explore: user_data {
   }
 }
 
-explore: test {}
-
-explore: users {}
-
-explore: users_nn {}
+explore: orders_test {
+  label: "Orders Test"
+  from: orders
+  view_name:  orders
+  join: users {
+    type: left_outer
+    sql_on: ${orders.user_id} = ${users.id} ;;
+    relationship: many_to_one
+  }
+  sql_always_where: {% if orders.Month_selector._parameter_value == "'January'" %}
+      ${orders.created_month_name} = "January"
+      {% elsif orders.Month_selector._parameter_value == "'Current Month'" %}
+      ((((${orders.created_raw}) >= ((TIMESTAMP(DATE_FORMAT(CURDATE(),'%Y-%m-01')))) AND (${orders.created_raw}) < ((DATE_ADD(TIMESTAMP(DATE_FORMAT(CURDATE(),'%Y-%m-01')),INTERVAL 1 month))))))
+      {% else %}
+      ${orders.created_month_name} = "February"
+      {% endif %}
+      ;;
+}
