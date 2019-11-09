@@ -11,11 +11,24 @@ view: products {
   dimension: brand {
     type: string
     sql: ${TABLE}.brand ;;
+    link: {
+      label: "Drill to Dashboard B"
+      url: "/dashboards/5?Brand={{ value | url_encode }}&Date={{ _filters['orders.created_date'] | url_encode }}
+      &Department={{ products.department | url_encode }}"
+    }
   }
 
   dimension: category {
     type: string
     sql: ${TABLE}.category ;;
+    link: {
+      label: "Drill to Explore"
+      url: "https://localhost:9999/explore/project1/products?
+ fields=products.id,products.brand
+ ,products.item_name,products.retail_price
+ ,products.department,products.category
+ &f[products.brand]={{ products.brand | url_encode }}"
+    }
   }
 
   dimension: department {

@@ -100,3 +100,68 @@ explore: orders_test {
       {% endif %}
       ;;
 }
+
+
+view: derived_table_test {
+  parameter: Select_Me{
+    allowed_value: {
+      label: "US"
+      value: "US"
+    }
+    allowed_value: {
+      label: "EU"
+      value: "EU"
+    }
+  }
+
+  parameter: give_me_value{
+    type: number
+  }
+  derived_table: {
+    sql: SELECT orders.created_at as Created, order_items.sale_price as Sale_Price, orders.user_id as User_ID, orders.status as Status
+    FROM orders LEFT JOIN order_items ON orders.id = order_items.order_id;;
+  }
+
+  dimension_group: : created {
+    sql: ${TABLE}.Created ;;
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year,
+      month_name
+    ]
+  }
+  dimension: parameterized_date {
+    sql: ${created_date} ;;
+    html: {% if Select_Me._parameter_value == "'EU'" %}
+    {{ rendered_value | date: "%d/%m/%Y"}}
+    {% elsif Select_Me._parameter_value == "'US'" %}
+    {{ rendered_value | date: "%m/%d/%Y"}}
+    {% endif %}
+    ;;
+  }
+
+  measure: Sum_Sales{
+    sql: ${TABLE}.Sale_Price;;
+    type: sum
+    value_format_name: usd_0
+  }
+
+  measure: test {
+    sql: ${Sum_Sales}/${give_me_value};;
+    type: number
+  }
+
+  dimension: status {
+    sql: ${TABLE}.Status;;
+    type: string
+  }
+}
+
+
+explore: derived_table_test {}
