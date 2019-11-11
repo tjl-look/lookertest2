@@ -40,8 +40,8 @@
     col: 0
     width: 8
     height: 6
-  - title: Opacity .8
-    name: Opacity .8
+  - title: testestestest
+    name: Opacity 8
     model: project1
     explore: order_items
     type: looker_map
