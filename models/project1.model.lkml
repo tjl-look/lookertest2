@@ -116,13 +116,25 @@ view: derived_table_test {
     }
   }
 
+  filter: give_me_date {
+    type: date
+  }
+
+
   parameter: give_me_value{
     type: number
   }
   derived_table: {
     sql: SELECT orders.created_at as Created, order_items.sale_price as Sale_Price, orders.user_id as User_ID, orders.status as Status
-    FROM orders LEFT JOIN order_items ON orders.id = order_items.order_id;;
+    FROM orders LEFT JOIN order_items ON orders.id = order_items.order_id
+    WHERE {% condition give_me_status %} orders.status {% endcondition %} ;;
   }
+
+  filter: give_me_status {
+    suggest_dimension: status
+
+  }
+
 
   dimension_group: : created {
     sql: ${TABLE}.Created ;;
