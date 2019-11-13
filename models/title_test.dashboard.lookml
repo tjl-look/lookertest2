@@ -1,5 +1,5 @@
-- dashboard: heatmapbug
-  title: HeatMapBug
+- dashboard: titletest
+  title: test
   layout: newspaper
   elements:
   - title: Tile1
@@ -40,8 +40,8 @@
     col: 0
     width: 8
     height: 6
-  - title: Opacity .8
-    name: Opacity .8
+  - title: Opacity
+    name: Opacity
     model: project1
     explore: order_items
     type: looker_map
