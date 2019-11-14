@@ -3,7 +3,7 @@ connection: "thelook"
 # include all the views
 include: "/views/**/*.view"
 
-include: "*heatmapbugtim.dashboard.lookml"
+include: "*testheatmappt2.dashboard.lookml"
 
 datagroup: project1_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
