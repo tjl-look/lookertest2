@@ -1,5 +1,5 @@
 - dashboard: heatmapbug_test234
-  title: heatmapbug test2
+  title: heatmapbug test23444
   layout: newspaper
   elements:
   - title: heatmapbug test2
