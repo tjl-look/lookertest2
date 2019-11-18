@@ -1,4 +1,4 @@
-- dashboard: heatmapbug_test2
+- dashboard: heatmapbug_test234
   title: heatmapbug test2
   layout: newspaper
   elements:
