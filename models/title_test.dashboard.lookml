@@ -41,3 +41,4 @@
     row: 0
     col: 0
     width: 8
+    height: 6
