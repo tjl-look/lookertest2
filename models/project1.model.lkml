@@ -1,10 +1,10 @@
 connection: "thelook"
-label: "test"
-
 # include all the views
 include: "/views/**/*.view"
 
 include: "*.dashboard.lookml"
+
+label: "heatmapbugtest"
 
 datagroup: project1_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
