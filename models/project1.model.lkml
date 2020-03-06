@@ -1,4 +1,5 @@
 connection: "thelook"
+label: "test"
 
 # include all the views
 include: "/views/**/*.view"
@@ -62,13 +63,13 @@ explore: order_items {
   }
 }
 
-explore: orders {
-  join: users {
-    type: left_outer
-    sql_on: ${orders.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
-}
+#explore: orders {
+#  join: users {
+#    type: left_outer
+#    sql_on: ${orders.user_id} = ${users.id} ;;
+#    relationship: many_to_one
+#  }
+#}
 
 explore: products {}
 
@@ -177,5 +178,12 @@ view: derived_table_test {
   }
 }
 
-
+explore: orders_date_test {
+  from: orders
+  view_name: orders
+  sql_always_where:
+  {% if orders.last_7_days._parameter_value  == "7" %}
+  (((${created_date} >= ((DATE_ADD(CURDATE(),INTERVAL -6 day))) AND (${created_date}) < ((DATE_ADD(DATE_ADD(CURDATE(),INTERVAL -6 day),INTERVAL 7 day)))))
+  {% endif %};;
+}
 explore: derived_table_test {}

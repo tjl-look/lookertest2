@@ -56,6 +56,16 @@ view: products {
     sql: ${TABLE}.sku ;;
   }
 
+  dimension: test_cocnat {
+    type: string
+    sql: ${department} || ${category} ;;
+  }
+
+  measure: count_test {
+    sql_distinct_key: ${test_cocnat};;
+    type: count_distinct
+  }
+
   measure: count {
     type: count
     drill_fields: [id, item_name, inventory_items.count]

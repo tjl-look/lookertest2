@@ -58,6 +58,21 @@ view: orders {
     }
   }
 
+  parameter: last_7_days {
+    allowed_value: {
+      label: "7"
+      value: "7"
+    }
+    allowed_value: {
+      label: "30"
+      value: "30"
+    }
+    allowed_value: {
+      label: "90"
+      value: "90"
+    }
+  }
+
   dimension: id {
     primary_key: yes
     type: number
@@ -72,8 +87,6 @@ view: orders {
       date,
       week,
       month,
-      quarter,
-      year,
       month_name
     ]
     sql: ${TABLE}.created_at ;;
@@ -100,9 +113,4 @@ view: orders {
     sql: MIN(${TABLE}.created_at) ;;
   }
 
-  measure: count_organic_users {
-    type: count_distinct
-    sql:  ${users.id} ;;
-    drill_fields: [id, users.id, users.first_name, users.last_name, order_items.count]
-    }
   }
