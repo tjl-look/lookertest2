@@ -4,7 +4,7 @@ include: "/views/**/*.view"
 
 include: "*.dashboard.lookml"
 
-label: "heatmapbugtest"
+label: "Heatmapbugtest"
 
 datagroup: project1_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
